@@ -59,7 +59,7 @@
     <script>
       const selectedQuestions = new Map();  // Track selected questions and their DOM elements
 
-      fetch('http://127.0.0.1:8080/questions')
+      fetch('https://midterm-backend-p532-carter51.onrender.com/questions')
         .then(response => response.json())
         .then(questions => {
           const container = document.getElementById('cardContainer');
@@ -69,7 +69,7 @@
           document.querySelector('.quizcreation-border').appendChild(quizPanel);
 
           questions.forEach(q => {
-            const imageUrl = `http://127.0.0.1:8080/questions/${q.id}/image`;
+            const imageUrl = `https://midterm-backend-p532-carter51.onrender.com/questions/${q.id}/image`;
             const cardElement = createCard(q, imageUrl);
             selectedQuestions.set(q.id, { question: q, imageUrl, cardElement });
             container.appendChild(cardElement);
@@ -167,7 +167,7 @@
         const questionIds = Array.from(selectedCards).map(card => Number(card.dataset.id));
         const quizData = { title: title, questionIds: questionIds };
 
-        fetch('http://127.0.0.1:8080/quizzes')
+        fetch('https://midterm-backend-p532-carter51.onrender.com/quizzes')
           .then(res => res.json())
           .then(allQuizzes => {
             const existingQuiz = allQuizzes.find(q => q.title.toLowerCase() === title.toLowerCase());
@@ -179,13 +179,13 @@
               }
 
               quizData.id = existingQuiz.id;
-              return fetch(`http://127.0.0.1:8080/quizzes/${existingQuiz.id}`, {
+              return fetch(`https://midterm-backend-p532-carter51.onrender.com/quizzes/${existingQuiz.id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(quizData)
               });
             } else {
-              return fetch('http://127.0.0.1:8080/quizzes', {
+              return fetch('https://midterm-backend-p532-carter51.onrender.com/quizzes', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(quizData)

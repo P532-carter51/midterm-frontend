@@ -48,7 +48,7 @@
       const cardContainer = document.getElementById('cardContainer');
 
       // Fetch quizzes and display them
-      fetch('http://127.0.0.1:8080/quizzes')
+      fetch('https://midterm-backend-p532-carter51.onrender.com/quizzes')
         .then(res => res.json())
         .then(quizzes => {
           quizzes.forEach(quiz => {
@@ -84,7 +84,7 @@
         document.getElementById('quizCardArea').innerHTML = '';
         score = 0;
 
-        fetch(`http://127.0.0.1:8080/quizzes/${quizId}`)
+        fetch(`https://midterm-backend-p532-carter51.onrender.com/quizzes/${quizId}`)
           .then(res => res.json())
           .then(quiz => {
             quizQuestions = quiz.questionIds;
@@ -95,11 +95,11 @@
       }
 
       function loadQuestionCard(questionId) {
-        fetch(`http://127.0.0.1:8080/questions/${questionId}`)
+        fetch(`https://midterm-backend-p532-carter51.onrender.com/questions/${questionId}`)
           .then(res => res.json())
           .then(q => {
             const container = document.getElementById('quizCardArea');
-            const imageUrl = `http://127.0.0.1:8080/questions/${q.id}/image`;
+            const imageUrl = `https://midterm-backend-p532-carter51.onrender.com/questions/${q.id}/image`;
 
             const choicesHTML = q.choices.map((opt, i) => `
         <div class="form-check">
@@ -177,7 +177,7 @@
         let correctCount = 0;
 
         // Fetch all questions to validate answers
-        Promise.all(quizQuestions.map(id => fetch(`http://127.0.0.1:8080/questions/${id}`).then(res => res.json())))
+        Promise.all(quizQuestions.map(id => fetch(`https://midterm-backend-p532-carter51.onrender.com/questions/${id}`).then(res => res.json())))
           .then(questions => {
             questions.forEach(q => {
               if (selectedAnswers[q.id] === q.answer) correctCount++;
